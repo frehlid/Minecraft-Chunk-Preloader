@@ -11,9 +11,8 @@ import net.minecraft.text.Text;
 import static net.minecraft.server.command.CommandManager.argument;
 
 public class LODChunkLoaderClient implements ClientModInitializer {
-	int HEIGHT = 200;
-	int RADIUS = 1000;
-
+	public static int RADIUS = 100;
+	int HEIGHT = 175;
 	public static boolean shouldStartMoving = false;
 	public static boolean shouldBeMoving = false;
 
@@ -109,7 +108,9 @@ public class LODChunkLoaderClient implements ClientModInitializer {
 		private int currentSideLength = 0; // Current length of the side being traversed
 		private int direction = 0; // Direction of movement: 0 = right, 1 = down, 2 = left, 3 = up
 		private int[] position = {0, 0}; // Current chunk position (x, z)
-		private final int CHUNK_SIZE = 16 * 8; // Size of the chunk
+		private final float CHUNK_SIZE = 16 * 8; // Size of the chunk
+
+		private int currentYaw = 0;
 
 		public void movePlayerInSpiral(MinecraftClient client) {
 			if (currentSideLength < lengthOfSide) {
@@ -143,8 +144,11 @@ public class LODChunkLoaderClient implements ClientModInitializer {
 
 			// Teleport the player to the center of the current chunk
 			client.player.setPos(centerX, HEIGHT, centerZ);
+			client.player.setYaw(currentYaw);
 
 			currentStep++; // Move to the next step in the spiral
+			currentYaw += 10;
+			currentYaw %= 360;
 		}
 	}
 
