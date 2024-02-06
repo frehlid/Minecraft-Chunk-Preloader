@@ -1,0 +1,41 @@
+{
+	"schemaVersion": 1,
+	"id": "lod-chunk-loader",
+	"version": "${version}",
+	"name": "LOD-Chunk-Loader",
+	"description": "This is an example description! Tell everyone what your mod is about!",
+	"authors": [
+		"Me!"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/lod-chunk-loader/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"com.lodchunkloader.LODChunkLoader"
+		],
+		"client": [
+			"com.lodchunkloader.LODChunkLoaderClient"
+		]
+	},
+	"mixins": [
+		"lod-chunk-loader.mixins.json",
+		{
+			"config": "lod-chunk-loader.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.15.6",
+		"minecraft": "~1.19.4",
+		"java": ">=17",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}
